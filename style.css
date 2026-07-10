@@ -2,99 +2,127 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#ffdde1,#ee9ca7);
-font-family:'Poppins',sans-serif;
-overflow-x:hidden;
-color:white;
-text-align:center;
+background:#000;
+color:#fff;
+overflow:hidden;
 }
 
-.intro,
-.message{
-min-height:100vh;
+section{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 padding:30px;
+text-align:center;
+display:none;
+}
+
+#intro{
+display:flex;
+}
+
+.glow{
+position:absolute;
+width:350px;
+height:350px;
+background:#ff2d75;
+filter:blur(170px);
+border-radius:50%;
+opacity:.35;
+animation:pulse 5s infinite;
 }
 
 h1{
-font-size:55px;
-margin-bottom:20px;
+font-size:65px;
 font-family:'Dancing Script',cursive;
-text-shadow:0 5px 15px rgba(0,0,0,.3);
+z-index:2;
 }
 
 h2{
 font-size:40px;
+margin-top:10px;
+color:#ff5d8f;
+z-index:2;
+}
+
+h3{
+letter-spacing:8px;
+font-size:18px;
 margin-bottom:25px;
+opacity:.8;
+z-index:2;
 }
 
 p{
-font-size:22px;
-line-height:1.8;
+margin-top:25px;
 max-width:700px;
+line-height:1.8;
+font-size:20px;
+z-index:2;
 }
 
 button{
-margin-top:40px;
+margin-top:45px;
 padding:18px 45px;
 font-size:20px;
 border:none;
 border-radius:40px;
-background:#ff4f81;
+background:#ff2d75;
 color:white;
 cursor:pointer;
 transition:.3s;
-box-shadow:0 10px 30px rgba(0,0,0,.25);
+box-shadow:0 0 25px #ff2d75;
+z-index:2;
 }
 
 button:hover{
 transform:scale(1.08);
 }
 
-.gallery{
-display:none;
-padding:40px 20px;
+#countdown .heart{
+font-size:70px;
+animation:beat 1s infinite;
 }
 
-.gallery img{
+#number{
+font-size:140px;
+margin:20px 0;
+text-shadow:0 0 25px #ff2d75;
+}
+
+#slide{
 width:90%;
 max-width:420px;
-height:auto;
+height:75vh;
+object-fit:cover;
 border-radius:25px;
-margin:40px auto;
-display:block;
-box-shadow:0 15px 40px rgba(0,0,0,.4);
-opacity:0;
-transform:translateY(40px);
+box-shadow:0 0 35px rgba(255,255,255,.25);
 transition:1s;
 }
 
-.gallery img.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.message{
-display:none;
+#typing{
+max-width:750px;
+white-space:pre-line;
 }
 
 #hearts{
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
-pointer-events:none;
 overflow:hidden;
+pointer-events:none;
 }
 
-.heart{
+.heartFloat{
 position:absolute;
 font-size:24px;
 animation:float 8s linear infinite;
@@ -103,7 +131,7 @@ animation:float 8s linear infinite;
 @keyframes float{
 
 0%{
-transform:translateY(100vh);
+transform:translateY(110vh);
 opacity:0;
 }
 
@@ -115,5 +143,21 @@ opacity:1;
 transform:translateY(-120px);
 opacity:0;
 }
+
+}
+
+@keyframes beat{
+
+0%{transform:scale(1);}
+50%{transform:scale(1.25);}
+100%{transform:scale(1);}
+
+}
+
+@keyframes pulse{
+
+0%{transform:scale(.8);}
+50%{transform:scale(1.2);}
+100%{transform:scale(.8);}
 
 }
