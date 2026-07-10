@@ -1,63 +1,178 @@
-function start(){
+const intro = document.getElementById("intro");
+const countdown = document.getElementById("countdown");
+const celebrate = document.getElementById("celebrate");
+const gallery = document.getElementById("gallery");
+const letter = document.getElementById("letter");
+const end = document.getElementById("end");
 
-document.querySelector(".intro").style.display="none";
-document.querySelector(".gallery").style.display="block";
+const startBtn = document.getElementById("startBtn");
+const number = document.getElementById("number");
+const slide = document.getElementById("slide");
+const typing = document.getElementById("typing");
 
-const images=document.querySelectorAll(".gallery img");
+const photos = [
+"images/photo1.JPG",
+"images/photo2.JPG",
+"images/photo3.JPG",
+"images/photo4.JPG",
+"images/photo5.JPG",
+"images/photo6.JPG",
+"images/photo7.JPG",
+"images/photo8.JPG"
+];
 
-let i=0;
+const message = `Happy Birthday Omosa ❤️
 
-function showNext(){
+Today is your special day.
 
-if(i>0){
-images[i-1].style.display="none";
-}
+I hope this year brings you happiness,
+success,
+peace,
+beautiful memories,
+and endless reasons to smile.
 
-if(i<images.length){
+Thank you for being such an amazing person.
 
-images[i].style.display="block";
+Never stop believing in yourself.
 
-setTimeout(()=>{
-images[i].classList.add("show");
-},100);
+Keep smiling.
 
-i++;
+❤️
 
-setTimeout(showNext,3000);
+With Love,
+
+Maji`;
+
+startBtn.onclick = () => {
+
+intro.style.display = "none";
+countdown.style.display = "flex";
+
+let count = 5;
+
+number.innerHTML = count;
+
+const timer = setInterval(() => {
+
+count--;
+
+if(count > 0){
+
+number.innerHTML = count;
 
 }else{
 
-document.querySelector(".gallery").style.display="none";
-document.querySelector(".message").style.display="flex";
+clearInterval(timer);
+
+countdown.style.display = "none";
+celebrate.style.display = "flex";
+
+setTimeout(() => {
+
+celebrate.style.display = "none";
+
+showGallery();
+
+},3000);
 
 }
 
-}
+},1000);
 
-images.forEach(img=>{
-img.style.display="none";
-});
+};
 
-showNext();
+function showGallery(){
 
-}
+gallery.style.display = "flex";
 
-for(let i=0;i<50;i++){
+let current = 0;
 
-const heart=document.createElement("div");
+slide.src = photos[current];
 
-heart.className="heart";
+const slideshow = setInterval(() => {
 
-heart.innerHTML="❤️";
+current++;
 
-heart.style.left=Math.random()*100+"%";
+if(current >= photos.length){
 
-heart.style.animationDuration=(5+Math.random()*5)+"s";
+clearInterval(slideshow);
 
-heart.style.fontSize=(20+Math.random()*20)+"px";
+gallery.style.display = "none";
 
-heart.style.animationDelay=Math.random()*5+"s";
+showLetter();
 
-document.getElementById("hearts").appendChild(heart);
+return;
 
 }
+
+slide.style.opacity = 0;
+
+setTimeout(() => {
+
+slide.src = photos[current];
+
+slide.style.opacity = 1;
+
+},500);
+
+},3000);
+
+}
+
+function showLetter(){
+
+letter.style.display = "flex";
+
+let i = 0;
+
+const type = setInterval(() => {
+
+typing.innerHTML += message.charAt(i);
+
+i++;
+
+if(i >= message.length){
+
+clearInterval(type);
+
+setTimeout(() => {
+
+letter.style.display = "none";
+
+end.style.display = "flex";
+
+},4000);
+
+}
+
+},40);
+
+}
+
+// Floating Hearts
+
+const hearts = document.getElementById("hearts");
+
+setInterval(() => {
+
+const heart = document.createElement("div");
+
+heart.className = "heartFloat";
+
+heart.innerHTML = "❤️";
+
+heart.style.left = Math.random()*100 + "%";
+
+heart.style.fontSize = (20 + Math.random()*25) + "px";
+
+heart.style.animationDuration = (5 + Math.random()*5) + "s";
+
+hearts.appendChild(heart);
+
+setTimeout(() => {
+
+heart.remove();
+
+},10000);
+
+},300);
