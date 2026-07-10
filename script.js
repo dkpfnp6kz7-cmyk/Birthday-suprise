@@ -1,178 +1,69 @@
-const intro = document.getElementById("intro");
-const countdown = document.getElementById("countdown");
-const celebrate = document.getElementById("celebrate");
-const gallery = document.getElementById("gallery");
-const letter = document.getElementById("letter");
-const end = document.getElementById("end");
+const intro = document.querySelector(".intro");
+const gallery = document.querySelector(".gallery");
+const message = document.querySelector(".message");
 
-const startBtn = document.getElementById("startBtn");
-const number = document.getElementById("number");
-const slide = document.getElementById("slide");
-const typing = document.getElementById("typing");
+const images = document.querySelectorAll(".gallery img");
 
-const photos = [
-"images/photo1.JPG",
-"images/photo2.JPG",
-"images/photo3.JPG",
-"images/photo4.JPG",
-"images/photo5.JPG",
-"images/photo6.JPG",
-"images/photo7.JPG",
-"images/photo8.JPG"
-];
+gallery.style.display = "none";
+message.style.display = "none";
 
-const message = `Happy Birthday Omosa ❤️
-
-Today is your special day.
-
-I hope this year brings you happiness,
-success,
-peace,
-beautiful memories,
-and endless reasons to smile.
-
-Thank you for being such an amazing person.
-
-Never stop believing in yourself.
-
-Keep smiling.
-
-❤️
-
-With Love,
-
-Maji`;
-
-startBtn.onclick = () => {
+function start() {
 
 intro.style.display = "none";
-countdown.style.display = "flex";
-
-let count = 5;
-
-number.innerHTML = count;
-
-const timer = setInterval(() => {
-
-count--;
-
-if(count > 0){
-
-number.innerHTML = count;
-
-}else{
-
-clearInterval(timer);
-
-countdown.style.display = "none";
-celebrate.style.display = "flex";
-
-setTimeout(() => {
-
-celebrate.style.display = "none";
-
-showGallery();
-
-},3000);
-
-}
-
-},1000);
-
-};
-
-function showGallery(){
-
 gallery.style.display = "flex";
 
 let current = 0;
 
-slide.src = photos[current];
+images.forEach((img, index)=>{
+img.style.display = index===0 ? "block":"none";
+});
 
-const slideshow = setInterval(() => {
+const slide = setInterval(()=>{
+
+images[current].style.display="none";
 
 current++;
 
-if(current >= photos.length){
+if(current>=images.length){
 
-clearInterval(slideshow);
+clearInterval(slide);
 
-gallery.style.display = "none";
+gallery.style.display="none";
 
-showLetter();
+message.style.display="flex";
 
 return;
 
 }
 
-slide.style.opacity = 0;
-
-setTimeout(() => {
-
-slide.src = photos[current];
-
-slide.style.opacity = 1;
-
-},500);
+images[current].style.display="block";
 
 },3000);
 
 }
 
-function showLetter(){
-
-letter.style.display = "flex";
-
-let i = 0;
-
-const type = setInterval(() => {
-
-typing.innerHTML += message.charAt(i);
-
-i++;
-
-if(i >= message.length){
-
-clearInterval(type);
-
-setTimeout(() => {
-
-letter.style.display = "none";
-
-end.style.display = "flex";
-
-},4000);
-
-}
-
-},40);
-
-}
+document.getElementById("startBtn").onclick = start;
 
 // Floating Hearts
 
-const hearts = document.getElementById("hearts");
+const hearts=document.getElementById("hearts");
 
-setInterval(() => {
+setInterval(()=>{
 
-const heart = document.createElement("div");
+const heart=document.createElement("div");
 
-heart.className = "heartFloat";
+heart.innerHTML="❤️";
 
-heart.innerHTML = "❤️";
+heart.className="heartFloat";
 
-heart.style.left = Math.random()*100 + "%";
+heart.style.left=Math.random()*100+"%";
 
-heart.style.fontSize = (20 + Math.random()*25) + "px";
+heart.style.fontSize=(18+Math.random()*25)+"px";
 
-heart.style.animationDuration = (5 + Math.random()*5) + "s";
+heart.style.animationDuration=(5+Math.random()*5)+"s";
 
 hearts.appendChild(heart);
 
-setTimeout(() => {
+setTimeout(()=>heart.remove(),9000);
 
-heart.remove();
-
-},10000);
-
-},300);
+},400);
